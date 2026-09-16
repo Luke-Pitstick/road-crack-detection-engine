@@ -1,8 +1,13 @@
-# InfraDrone Engine
+# Road Crack Detection Engine
 
-InfraDrone analyzes road-survey video with YOLO segmentation and custom crack merging,
-branch analysis, and pixel measurements. The video pipeline runs independently of the
-older drone frame queue.
+Road Crack Detection Engine analyzes road-survey video with YOLO segmentation,
+custom crack merging, branch analysis, and pixel measurements. Camera calibration
+supports physical measurements, and SuperPoint + LightGlue feature matching
+supports tracking defects across observations.
+
+[RoadVision](https://infradrone.vercel.app) is the companion web interface for
+exploring survey footage, maps, and damage findings. This repository contains the
+Python analysis engine; video processing runs independently of the legacy frame queue.
 
 ## Video pipeline
 
@@ -456,7 +461,7 @@ Paris' Law models **fatigue crack growth** under repeated stress:
 da/dN = C · (ΔK)^m
 ```
 
-Where crack length grows per load cycle as a function of stress intensity. InfraDrone is designed to use this to estimate how an observed defect may worsen over time given the road's traffic/stress category (`StressRange` in `constants.py`).
+Where crack length grows per load cycle as a function of stress intensity. The engine is designed to use this to estimate how an observed defect may worsen over time given the road's traffic/stress category (`StressRange` in `constants.py`).
 
 > **Note:** The top-level `Engine` class wires detection and segmentation together. Paris' Law integration, severity scoring, backend persistence, and full prediction output are still being built out.
 
